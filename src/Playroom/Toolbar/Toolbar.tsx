@@ -14,6 +14,7 @@ import EditorBottomIcon from '../icons/EditorBottomIcon';
 import EditorRightIcon from '../icons/EditorRightIcon';
 import ShareIcon from '../icons/ShareIcon';
 import PlayIcon from '../icons/PlayIcon';
+import playroomConfig from '../../config';
 
 // @ts-ignore
 import styles from './Toolbar.less';
@@ -59,9 +60,15 @@ export default ({ themes: allThemes, widths: allWidths, snippets }: Props) => {
   const [isReady, cancel, reset] = useTimeoutFn(() => setCopying(false), 3000);
 
   const copyHandler = useCallback(() => {
+    const copyUrl = playroomConfig.rewriteCopyCodeUrl
+      ? `${playroomConfig.rewriteCopyCodeUrl}${window.location.search}${window.location.hash}`
+      : window.location.href;
+    console.log(playroomConfig);
+    console.log(window.location);
+    console.log(copyUrl);
     dispatch({
       type: 'copyToClipboard',
-      payload: { url: window.location.href, trigger: 'toolbarItem' },
+      payload: { url: copyUrl, trigger: 'toolbarItem' },
     });
     setCopying(true);
 

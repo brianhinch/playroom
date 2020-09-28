@@ -4,7 +4,10 @@ import { StoreContext } from './../StoreContext/StoreContext';
 import { createPreviewUrl } from '../../utils';
 import playroomConfig from '../config';
 
-const baseUrl = window.location.href
+const baseUrl = (playroomConfig.rewriteCopyPreviewUrl
+  ? `${playroomConfig.rewriteCopyPreviewUrl}${window.location.search}${window.location.hash}`
+  : window.location.href
+)
   .split(playroomConfig.paramType === 'hash' ? '#' : '?')[0]
   .split('index.html')[0];
 
