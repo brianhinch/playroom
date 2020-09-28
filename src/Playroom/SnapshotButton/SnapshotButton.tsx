@@ -1,7 +1,6 @@
 import React, { IframeHTMLAttributes } from 'react';
 import domtoimage from 'dom-to-image';
 import { Button } from '../Button/Button';
-import { doc } from 'prettier';
 
 interface SnapshotButtonProps {
   frameId: string;
@@ -68,7 +67,7 @@ const sendToClipboard = (mimeType: string, data: any) => {
 };
 
 const sendToClipboardFallback = (mimeType: string, dataURI: string) => {
-\  const tempId = `temp-${Math.random()}`.replace('.', '');
+  const tempId = `temp-${Math.random()}`.replace('.', '');
   const tempDiv: HTMLDivElement = document.createElement('div');
   tempDiv.id = tempId;
   const tempImg: HTMLImageElement = document.createElement('img');
