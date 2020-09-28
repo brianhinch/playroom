@@ -8,6 +8,7 @@ import { Text } from '../Text/Text';
 import playroomConfig from '../../config';
 import frameSrc from './frameSrc';
 import SnapshotButton from '../SnapshotButton/SnapshotButton';
+import ShareIcon from '../icons/ShareIcon';
 
 // @ts-ignore
 import styles from './Frames.less';
@@ -49,7 +50,9 @@ export default function Frames({ code, themes, widths }: FramesProps) {
             className={styles.frameContainer}
           >
             <div className={styles.frameActions} data-testid="frameActions">
-              <SnapshotButton frameId={frameId}>Copy Screenshot</SnapshotButton>
+              <SnapshotButton frameId={frameId} format="png">
+                Copy as PNG <ShareIcon />
+              </SnapshotButton>
             </div>
             <div className={styles.frame}>
               <div className={styles.frameBorder} />
