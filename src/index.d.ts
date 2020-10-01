@@ -13,6 +13,8 @@ interface PlayroomConfig {
   baseUrl?: string;
   paramType: 'hash' | 'search';
   iframeSandbox?: string;
+  rewriteCopyCodeUrl?: string;
+  rewriteCopyPreviewUrl?: string;
 }
 
 interface InternalPlayroomConfig extends PlayroomConfig {
