@@ -61,6 +61,20 @@
     opacity: @preview-inactive-label-opacity;
   }
 }
+.frameActions {
+  @frame-name-height: 30px;
+
+  flex: 0 0 @frame-name-height;
+  height: @frame-name-height;
+  margin-bottom: 1em;
+  transition: @transition-medium;
+  display: flex;
+  align-items: center;
+
+  .frameContainer:not(:hover) & {
+    opacity: @preview-inactive-label-opacity;
+  }
+}
 
 .frame {
   height: 100%;
