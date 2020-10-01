@@ -19,6 +19,7 @@ interface CreatePreviewUrlOptions {
   baseUrl?: string;
   code?: string;
   theme?: string;
+  appendPreview?: boolean;
 }
 
 export const createPreviewUrl: (options: CreatePreviewUrlOptions) => string;

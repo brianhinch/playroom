@@ -11,6 +11,8 @@ interface PlayroomConfig {
   storageKey?: string;
   webpackConfig?: () => void;
   baseUrl?: string;
+  rewriteCopyCodeUrl?: string;
+  rewriteCopyPreviewUrl?: string;
 }
 
 interface InternalPlayroomConfig extends PlayroomConfig {

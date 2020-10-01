@@ -23,7 +23,7 @@ const createUrl = ({ baseUrl, code, themes, widths }) => {
   return path;
 };
 
-const createPreviewUrl = ({ baseUrl, code, theme }) => {
+const createPreviewUrl = ({ baseUrl, code, theme, appendPreview = true }) => {
   let path = '';
 
   if (code || theme) {
@@ -33,13 +33,15 @@ const createPreviewUrl = ({ baseUrl, code, theme }) => {
     });
 
     const compressedData = lzString.compressToEncodedURIComponent(data);
-    path = `/preview#?code=${compressedData}`;
+    path = `${appendPreview ? '/preview' : ''}?code=${compressedData}`;
   }
 
   if (baseUrl) {
-    const trimmedBaseUrl = baseUrl.replace(/\/$/, '');
-
-    return `${trimmedBaseUrl}${path}`;
+    if (appendPreview) {
+      const trimmedBaseUrl = baseUrl.replace(/\/$/, '');
+      return `${trimmedBaseUrl}${path}`;
+    }
+    return `${baseUrl}${path}`;
   }
 
   return path;

@@ -3,7 +3,11 @@ import { useContext } from 'react';
 import { StoreContext } from './../StoreContext/StoreContext';
 import { createPreviewUrl } from '../../utils';
 
-const baseUrl = window.location.href.split('#')[0];
+const playroomConfig = (window.__playroomConfig__ = __PLAYROOM_GLOBAL__CONFIG__);
+
+const baseUrl = playroomConfig.rewriteCopyPreviewUrl
+  ? `${playroomConfig.rewriteCopyPreviewUrl}${window.location.search}${window.location.hash}`
+  : window.location.href;
 
 export default (theme: string) => {
   const [{ code }] = useContext(StoreContext);
@@ -11,8 +15,11 @@ export default (theme: string) => {
   const isThemed = theme !== '__PLAYROOM__NO_THEME__';
 
   return createPreviewUrl({
-    baseUrl,
+    baseUrl: playroomConfig.rewriteCopyPreviewUrl
+      ? baseUrl
+      : baseUrl.split('index.html')[0],
     code,
     theme: isThemed ? theme : undefined,
+    appendPreview: !playroomConfig.rewriteCopyPreviewUrl,
   });
 };
