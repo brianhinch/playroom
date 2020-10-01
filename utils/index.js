@@ -29,19 +29,31 @@ const createUrl = ({ baseUrl, code, themes, widths, paramType = 'hash' }) => {
   return path;
 };
 
-const createPreviewUrl = ({ baseUrl, code, theme, paramType = 'hash' }) => {
+const createPreviewUrl = ({
+  baseUrl,
+  code,
+  theme,
+  paramType = 'hash',
+  appendPreview = true,
+}) => {
   let path = '';
+
+  console.debug('createPreviewUrl createPreviewUrl=', appendPreview);
 
   if (code || theme) {
     const compressedData = compressParams({ code, theme });
 
-    path = `/preview${paramType === 'hash' ? '#' : ''}?code=${compressedData}`;
+    path = `${appendPreview ? '/preview' : ''}${
+      paramType === 'hash' ? '#' : ''
+    }?code=${compressedData}`;
   }
 
   if (baseUrl) {
-    const trimmedBaseUrl = baseUrl.replace(/\/$/, '');
-
-    return `${trimmedBaseUrl}${path}`;
+    if (appendPreview) {
+      const trimmedBaseUrl = baseUrl.replace(/\/$/, '');
+      return `${trimmedBaseUrl}${path}`;
+    }
+    return `${baseUrl}${path}`;
   }
 
   return path;
